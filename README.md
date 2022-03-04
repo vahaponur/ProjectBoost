@@ -1,2 +1,2 @@
 # ProjectBoost
- Basic Rocket Game
+ Basic rocket game made with Unity
