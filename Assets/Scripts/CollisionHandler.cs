@@ -22,7 +22,7 @@ public class CollisionHandler : MonoBehaviour
         switch (other.gameObject.tag)
         {
             case "Finish":
-                
+                SceneManagerAdapter.LoadNextLevel();
                 break;
             case "Fuel":
                 
@@ -31,7 +31,7 @@ public class CollisionHandler : MonoBehaviour
                 
                 break;
             default:
-                StartCoroutine(SceneManagerAdapter.LoadCurrentScene());
+               SceneManagerAdapter.ReloadLevel();
                 break;
         }
     }
@@ -42,6 +42,5 @@ public class CollisionHandler : MonoBehaviour
     #endregion
     
     #region PrivateMethods
-    
     #endregion
 }
