@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class CollisionHandler : MonoBehaviour
 {
@@ -30,7 +31,7 @@ public class CollisionHandler : MonoBehaviour
                 
                 break;
             default:
-                Debug.Log("You bumped an obstacle");
+                StartCoroutine(SceneManagerAdapter.LoadCurrentScene());
                 break;
         }
     }
