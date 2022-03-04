@@ -9,8 +9,12 @@ public class Movement : MonoBehaviour
 {
     #region Serialized Fields
 
-    [SerializeField] private float _thrustForce = 100f;
-    [SerializeField] private float _rotationSpeed = 30f;
+    [SerializeField] private float _thrustForce = 1000f;
+    [SerializeField] private float _rotationSpeed = 50f;
+    [SerializeField] private KeyCode _thrushtKey = KeyCode.Space;
+    [SerializeField] private KeyCode _leftRotateKey = KeyCode.D;
+    [SerializeField] private KeyCode _rightRotateKey = KeyCode.A;
+    [SerializeField] private AudioClip _thrustSFX;
     #endregion
 
     #region Private Fields
@@ -54,9 +58,9 @@ public class Movement : MonoBehaviour
     /// </summary>
     private void ProcessThrust()
     {
-        _audioSource.PlayOnGetKey(KeyCode.Space);
+        _audioSource.PlayOnGetKey(_thrushtKey,_thrustSFX);
         
-        if (Input.GetKey(KeyCode.Space))
+        if (Input.GetKey(_thrushtKey))
         {
             _rigidbody.AddRelativeForce(Vector3.up* _thrustForce* Time.deltaTime );
         }
@@ -68,13 +72,13 @@ public class Movement : MonoBehaviour
     void ProcessRotation()
     {
     
-        if (Input.GetKey(KeyCode.A))
+        if (Input.GetKey(_rightRotateKey))
         {
             ApplyRotation(_rotationSpeed);
             return;
         }
 
-        if (Input.GetKey(KeyCode.D))
+        if (Input.GetKey(_leftRotateKey))
         {
             ApplyRotation(-_rotationSpeed);
             return;

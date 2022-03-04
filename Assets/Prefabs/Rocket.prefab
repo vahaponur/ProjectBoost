@@ -113,6 +113,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _thrustForce: 1000
   _rotationSpeed: 50
+  _thrushtKey: 32
+  _leftRotateKey: 100
+  _rightRotateKey: 97
 --- !u!54 &5385323986664333006
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -237,3 +240,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7c55e7984bfbb9045a5926d02834cf9e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _sceneLoadDelay: 3

@@ -7,34 +7,47 @@ using UnityEngine.SceneManagement;
 /// <summary>
 /// Handles Player Collision Events
 /// </summary>
+[RequireComponent(typeof(Movement))]
+[RequireComponent(typeof(AudioSource))]
 public class CollisionHandler : MonoBehaviour
 {
     #region Serialized Fields
+
+    [SerializeField] private float _sceneLoadDelay = 3f;
+    [SerializeField] private AudioClip _successSFX;
+    [SerializeField] private AudioClip _failSFX;
+    
     #endregion
 
     #region Private Fields
+
+    private Movement _movement;
+    private AudioSource _audioSource;
     #endregion
 
     #region Public Properties
     #endregion
 
     #region MonoBehaveMethods
-    
+
+    private void Awake()
+    {
+        _movement = GetComponent<Movement>();
+        _audioSource = GetComponent<AudioSource>();
+    }
+
     private void OnCollisionEnter(Collision other)
     {
         switch (other.gameObject.tag)
         {
             case "Finish":
-                SceneManagerAdapter.LoadNextLevel();
-                break;
-            case "Fuel":
-                
+                StartSuccessSequence();
                 break;
             case "Friendly":
                 
                 break;
             default:
-               SceneManagerAdapter.ReloadLevel();
+               StartCrashSequence();
                 break;
         }
     }
@@ -45,5 +58,46 @@ public class CollisionHandler : MonoBehaviour
     #endregion
     
     #region PrivateMethods
+    
+    /// <summary>
+    /// Starts the sequence of events when player fail
+    /// </summary>
+    void StartCrashSequence()
+    {
+
+        //ToDo add Crash particle effect
+        _audioSource.PlayWithLogic(_failSFX);
+        _movement.enabled = false;
+        Invoke("ReloadLevel",_sceneLoadDelay);
+    }
+    
+    /// <summary>
+    /// Starts the sequence of events when player succeed
+    /// </summary>
+    void StartSuccessSequence()
+    {
+       
+        //ToDo add Success particle effect
+        _audioSource.PlayWithLogic(_successSFX);
+        _movement.enabled = false;
+        Invoke("LoadNextLevel",_sceneLoadDelay);
+    }
+    
+    /// <summary>
+    /// Reloads Level, Written for invoke delay
+    /// </summary>
+    void ReloadLevel()
+    {
+        SceneManagerAdapter.ReloadLevel();
+    }
+    
+    /// <summary>
+    /// Loads next Level, Written for invoke delay
+    /// </summary>
+    void LoadNextLevel()
+    {
+        SceneManagerAdapter.LoadNextLevel();
+    }
+    
     #endregion
 }
