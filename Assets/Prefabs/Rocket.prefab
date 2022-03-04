@@ -116,6 +116,7 @@ MonoBehaviour:
   _thrushtKey: 32
   _leftRotateKey: 100
   _rightRotateKey: 97
+  _thrustSFX: {fileID: 8300000, guid: b950cb47aa3000d459240b5fc828f4b1, type: 3}
 --- !u!54 &5385323986664333006
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -241,3 +242,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _sceneLoadDelay: 3
+  _successSFX: {fileID: 8300000, guid: 7add535b7a5efa74e91b9d76ad6b78c0, type: 3}
+  _failSFX: {fileID: 8300000, guid: a17ece1bdd8d01e40b4e8c04bbed8835, type: 3}

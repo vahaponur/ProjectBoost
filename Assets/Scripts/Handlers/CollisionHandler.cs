@@ -19,7 +19,7 @@ public class CollisionHandler : MonoBehaviour
 
     private Movement _movement;
     private AudioSource _audioSource;
-    
+    private bool isTransitioning = false;
     #endregion
 
     #region Public Properties
@@ -61,11 +61,15 @@ public class CollisionHandler : MonoBehaviour
     /// </summary>
     void StartCrashSequence()
     {
+        if (!isTransitioning)
+        {
+            //ToDo add Crash particle effect
+            _audioSource.PlayWithLogic(_failSFX);
+            _movement.enabled = false;
+            Invoke("ReloadLevel",_sceneLoadDelay);  
+        }
 
-        //ToDo add Crash particle effect
-        _audioSource.PlayWithLogic(_failSFX);
-        _movement.enabled = false;
-        Invoke("ReloadLevel",_sceneLoadDelay);
+        isTransitioning = true;
     }
     
     /// <summary>
@@ -73,11 +77,15 @@ public class CollisionHandler : MonoBehaviour
     /// </summary>
     void StartSuccessSequence()
     {
-       
-        //ToDo add Success particle effect
-        _audioSource.PlayWithLogic(_successSFX);
-        _movement.enabled = false;
-        Invoke("LoadNextLevel",_sceneLoadDelay);
+        if (!isTransitioning)
+        {
+            //ToDo add Success particle effect
+            _audioSource.PlayWithLogic(_successSFX);
+            _movement.enabled = false;
+            Invoke("LoadNextLevel",_sceneLoadDelay);
+        }
+
+        isTransitioning = true;
     }
     
     /// <summary>
