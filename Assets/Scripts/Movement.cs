@@ -36,11 +36,6 @@ public class Movement : MonoBehaviour
 
     }
 
-    void Start()
-    {
-    }
-
-   
     void Update()
     {
         ProcessThrust();
@@ -53,6 +48,7 @@ public class Movement : MonoBehaviour
     #endregion
     
     #region PrivateMethods
+    
     /// <summary>
     /// Process the rockets thrust by given inputs 
     /// </summary>

@@ -4,6 +4,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
+/// <summary>
+/// Handles Player Collision Events
+/// </summary>
 public class CollisionHandler : MonoBehaviour
 {
     #region Serialized Fields

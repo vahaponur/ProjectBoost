@@ -87,8 +87,14 @@ public static  class SceneManagerAdapter
     public static void LoadNextLevel()
     {
         int nextSceneIndex = SceneManager.GetActiveScene().buildIndex + 1;
-                
+       
+        if (nextSceneIndex >= SceneManager.sceneCountInBuildSettings)
+        {
+            nextSceneIndex = 0;
+        }
+        
         CoroutineRunner.StartCoroutine(SceneManagerAdapter.LoadSceneAsync(nextSceneIndex));
+        
     }
     
     #endregion
