@@ -16,9 +16,17 @@ public class CollisionHandler : MonoBehaviour
     #endregion
 
     #region Private Fields
-
+    /// <summary>
+    /// Movement Component Attached to Gameobject
+    /// </summary>
     private Movement _movement;
+    /// <summary>
+    /// Audio Source Component Attached to Gameobject
+    /// </summary>
     private AudioSource _audioSource;
+    /// <summary>
+    /// To avoid multiple transitions
+    /// </summary>
     private bool isTransitioning = false;
     #endregion
 
@@ -35,6 +43,8 @@ public class CollisionHandler : MonoBehaviour
 
     private void OnCollisionEnter(Collision other)
     {
+        if (isTransitioning) return;
+       
         switch (other.gameObject.tag)
         {
             case "Finish":
@@ -61,15 +71,14 @@ public class CollisionHandler : MonoBehaviour
     /// </summary>
     void StartCrashSequence()
     {
-        if (!isTransitioning)
-        {
-            //ToDo add Crash particle effect
-            _audioSource.PlayWithLogic(_failSFX);
-            _movement.enabled = false;
-            Invoke("ReloadLevel",_sceneLoadDelay);  
-        }
-
+       
         isTransitioning = true;
+        //ToDo add Crash particle effect
+        _audioSource.PlayWithLogic(_failSFX);
+        _movement.enabled = false;
+        Invoke("ReloadLevel",_sceneLoadDelay);  
+        
+        
     }
     
     /// <summary>
@@ -77,15 +86,14 @@ public class CollisionHandler : MonoBehaviour
     /// </summary>
     void StartSuccessSequence()
     {
-        if (!isTransitioning)
-        {
-            //ToDo add Success particle effect
-            _audioSource.PlayWithLogic(_successSFX);
-            _movement.enabled = false;
-            Invoke("LoadNextLevel",_sceneLoadDelay);
-        }
-
+      
         isTransitioning = true;
+        //ToDo add Success particle effect
+        _audioSource.PlayWithLogic(_successSFX);
+        _movement.enabled = false;
+        Invoke("LoadNextLevel",_sceneLoadDelay);
+        
+        
     }
     
     /// <summary>
