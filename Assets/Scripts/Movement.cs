@@ -1,4 +1,4 @@
-using System.Collections;
+ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 /// <summary>
@@ -18,6 +18,11 @@ public class Movement : MonoBehaviour
     /// Rigidbody of the attached gameobject
     /// </summary>
     private Rigidbody _rigidbody;
+    
+    /// <summary>
+    /// Audio source attached to gameobject
+    /// </summary>
+    private AudioSource _audioSource;
     #endregion
 
     #region Public Properties
@@ -26,7 +31,8 @@ public class Movement : MonoBehaviour
     #region MonoBehaveMethods
     void Awake()
     {
-        _rigidbody = GetComponent<Rigidbody>();
+        _rigidbody = this.GetComponent<Rigidbody>();
+        _audioSource = this.GetComponent<AudioSource>();
 
     }
 
@@ -52,11 +58,13 @@ public class Movement : MonoBehaviour
     /// </summary>
     private void ProcessThrust()
     {
+        _audioSource.PlayOnGetKey(KeyCode.Space);
         if (Input.GetKey(KeyCode.Space))
         {
             _rigidbody.AddRelativeForce(Vector3.up* _thrustForce* Time.deltaTime );
         }
-
+        
+      
       
     }
     
@@ -90,5 +98,7 @@ public class Movement : MonoBehaviour
         _rigidbody.constraints = RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationY | RigidbodyConstraints.FreezePositionZ;
 
     }
+    
+    
     #endregion
 }
