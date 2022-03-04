@@ -59,13 +59,11 @@ public class Movement : MonoBehaviour
     private void ProcessThrust()
     {
         _audioSource.PlayOnGetKey(KeyCode.Space);
+        
         if (Input.GetKey(KeyCode.Space))
         {
             _rigidbody.AddRelativeForce(Vector3.up* _thrustForce* Time.deltaTime );
         }
-        
-      
-      
     }
     
     /// <summary>

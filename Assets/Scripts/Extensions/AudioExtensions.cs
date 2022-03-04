@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public static class AudioExtension 
+public static class AudioExtensions 
 {
     #region Serialized Fields
     #endregion
@@ -16,6 +16,7 @@ public static class AudioExtension
     
     
     #region PublicMethods
+    
     /// <summary>
     /// Plays the audio if not already playing
     /// </summary>
@@ -38,8 +39,13 @@ public static class AudioExtension
         if (Input.GetKey(keyCode))
         {
             PlayWithLogic(source);
-        }else{source.Stop();}
+        }
+        else
+        {
+            source.Stop();
+        }
     }
+    
     #endregion
     
     #region PrivateMethods
