@@ -1,8 +1,4 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 /// <summary>
 /// Handles Player Collision Events
@@ -23,6 +19,7 @@ public class CollisionHandler : MonoBehaviour
 
     private Movement _movement;
     private AudioSource _audioSource;
+    
     #endregion
 
     #region Public Properties
