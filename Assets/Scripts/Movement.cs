@@ -14,6 +14,9 @@ public class Movement : MonoBehaviour
     [SerializeField] private KeyCode _leftRotateKey = KeyCode.D;
     [SerializeField] private KeyCode _rightRotateKey = KeyCode.A;
     [SerializeField] private AudioClip _thrustSFX;
+    [SerializeField] private ParticleSystem _thrushtParticle;
+    [SerializeField] private ParticleSystem _leftBooster;
+    [SerializeField] private ParticleSystem _rightBooster;
     #endregion
 
     #region Private Fields
@@ -58,11 +61,15 @@ public class Movement : MonoBehaviour
     private void ProcessThrust()
     {
         _audioSource.PlayOnGetKey(_thrushtKey,_thrustSFX);
+        _thrushtParticle.PlayOnGetKey(_thrushtKey);
         
         if (Input.GetKey(_thrushtKey))
         {
+         
             _rigidbody.AddRelativeForce(Vector3.up* _thrustForce* Time.deltaTime );
         }
+    
+        
     }
     
     /// <summary>
@@ -70,7 +77,9 @@ public class Movement : MonoBehaviour
     /// </summary>
     void ProcessRotation()
     {
-    
+        _rightBooster.PlayOnGetKey(_rightRotateKey);
+        _leftBooster.PlayOnGetKey(_leftRotateKey);
+        
         if (Input.GetKey(_rightRotateKey))
         {
             ApplyRotation(_rotationSpeed);
@@ -80,8 +89,8 @@ public class Movement : MonoBehaviour
         if (Input.GetKey(_leftRotateKey))
         {
             ApplyRotation(-_rotationSpeed);
-            return;
         }
+       
     }
     
     /// <summary>

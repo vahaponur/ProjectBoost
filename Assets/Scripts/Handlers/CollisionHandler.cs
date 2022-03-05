@@ -12,6 +12,8 @@ public class CollisionHandler : MonoBehaviour
     [SerializeField] private float _sceneLoadDelay = 3f;
     [SerializeField] private AudioClip _successSFX;
     [SerializeField] private AudioClip _failSFX;
+    [SerializeField] private ParticleSystem _successParticleEffect;
+    [SerializeField] private ParticleSystem _failParticleEffect;
     
     #endregion
 
@@ -73,7 +75,8 @@ public class CollisionHandler : MonoBehaviour
     {
        
         isTransitioning = true;
-        //ToDo add Crash particle effect
+        _failParticleEffect.PlayWithLogic();
+     
         _audioSource.PlayWithLogic(_failSFX);
         _movement.enabled = false;
         Invoke("ReloadLevel",_sceneLoadDelay);  
@@ -88,7 +91,7 @@ public class CollisionHandler : MonoBehaviour
     {
       
         isTransitioning = true;
-        //ToDo add Success particle effect
+        _successParticleEffect.PlayWithLogic();
         _audioSource.PlayWithLogic(_successSFX);
         _movement.enabled = false;
         Invoke("LoadNextLevel",_sceneLoadDelay);
