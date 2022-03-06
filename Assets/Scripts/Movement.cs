@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 /// <summary>
@@ -51,6 +52,7 @@ public class Movement : MonoBehaviour
         ProcessThrust();
         ProcessRotation();
     }
+    
 
     #endregion
 
@@ -109,8 +111,8 @@ public class Movement : MonoBehaviour
     /// </summary>
     void StartThrusting()
     {
-        _audioSource.PlayOnGetKey(_thrushtKey, _thrustSFX);
-        _thrushtParticle.PlayOnGetKey(_thrushtKey);
+        _audioSource.PlayWithLogic( _thrustSFX);
+        _thrushtParticle.PlayWithLogic();
         _rigidbody.AddRelativeForce(Vector3.up * _thrustForce * Time.deltaTime);
     }
     
@@ -119,6 +121,8 @@ public class Movement : MonoBehaviour
     /// </summary>
     void StopThrushting()
     {
+        _audioSource.Stop();
+        _thrushtParticle.Stop();
     }
     
     /// <summary>

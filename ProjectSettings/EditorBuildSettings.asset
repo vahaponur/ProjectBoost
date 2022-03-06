@@ -11,4 +11,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Fly Under.unity
     guid: f79bac2666bd70844b537a2843b1f55a
+  - enabled: 1
+    path: Assets/Scenes/Fly Gap.unity
+    guid: bcc704d34cffa4b4e836c02e805a0ca6
   m_configObjects: {}
